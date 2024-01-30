@@ -9,8 +9,13 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
-    reequired: true,
+    required: true,
     unique: true,
+    validate: {
+      validator: function (v) {
+        return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
+      },
+    },
   },
   thoughts: [thoughtSchema],
 
@@ -23,10 +28,12 @@ const userSchema = new Schema({
   toJson: {
     virtuals: true,
   },
+  id: false,
 });
 
 userSchema.virtual("friendCount").get(() => {
-  return `${friends}`;
+  return this.friends.length;
 });
 
 const User = model("user", userSchema);
+module.exports = User;
