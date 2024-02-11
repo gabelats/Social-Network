@@ -1,5 +1,4 @@
-const { Thought, User, Reaction } = require("../models");
-const { findOne } = require("../models/Reaction");
+const { Thought, User, Reaction } = require("../models/thoughts");
 
 module.exports = {
   async allThoughts(req, res) {

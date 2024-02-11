@@ -1,6 +1,6 @@
 const { User } = require("../models");
 
-module.exports = {
+const userController = {
   //get all users
   async getUsers(req, res) {
     try {
@@ -27,7 +27,9 @@ module.exports = {
   // create a new user
   async createUser(req, res) {
     try {
+      console.log("here");
       const userData = await User.create(req.body);
+
       res.json(userData);
     } catch (err) {
       res.status(500).json(err);
@@ -94,3 +96,4 @@ module.exports = {
     }
   },
 };
+module.exports = userController;
